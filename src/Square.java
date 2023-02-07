@@ -15,7 +15,7 @@ public class Square {
     private String marker;
     private int row;
     private int col;
-    private boolean isWinningSquare;
+    public boolean isWinningSquare;
 
     /**
      * Constructor to initialize one Square of the

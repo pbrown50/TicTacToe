@@ -10,10 +10,13 @@
  * @version: Jan 2023
  */
 
+import java.awt.*;
 import java.util.Scanner;
+
 
 public class TicTacToe
 {
+    private TicTacToeViewer game;
     /** Board Markers **/
     public static final String X_MARKER = "X";
     public static final String O_MARKER = "O";
@@ -25,6 +28,10 @@ public class TicTacToe
     public static final int DIAGONAL_RIGHT_WIN = 3;
     public static final int DIAGONAL_LEFT_WIN = 4;
 
+    public final int WINDOW_WIDTH = 800;
+
+    public final int WINDOW_HEIGHT = 800;
+
     /** Winning Stats **/
     private String winner;      // Provides the marker of the winner
     private int winDirection;   // Provides the direction of the win
@@ -33,7 +40,7 @@ public class TicTacToe
     private int turn;
 
     private Square[][] board;
-    private boolean isGameOver;
+    public boolean isGameOver;
 
     /**
      * Constructor which initialized the board with BLANKs.
@@ -56,6 +63,8 @@ public class TicTacToe
         this.winner = BLANK;
         this.winIndex = -1;
         this.winDirection = -1;
+
+        game = new TicTacToeViewer(WINDOW_WIDTH, WINDOW_HEIGHT, board, this);
     }
 
     /******************** Methods You May Find Helpful ********************/
@@ -110,6 +119,7 @@ public class TicTacToe
         // Loop until there is a winner or no more turns
         while(!this.checkWin() && this.checkTurn()) {
             this.printBoard();
+            game.repaint();
             System.out.println("Enter your Row Pick:" );
             int row = input.nextInt();
             System.out.println("Enter your Col Pick:" );
@@ -120,7 +130,6 @@ public class TicTacToe
                 System.out.println("That space is taken, or you entered an invalid row/col");
             }
         }
-
         this.printBoard();
         this.isGameOver = true;
 
@@ -137,6 +146,7 @@ public class TicTacToe
                 System.out.println("X Wins!");
             }
         }
+        game.repaint();
     }
 
 
